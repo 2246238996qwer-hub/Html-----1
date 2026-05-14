@@ -130,6 +130,34 @@
         .nav-links li.active a::before {
             width: 60%;
         }
+        .search-box {
+    position: absolute;
+    right: 50px; /* 固定在右侧 */
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 5px 15px;
+    backdrop-filter: blur(5px);
+}
+
+.search-box input {
+    background: none;
+    border: none;
+    color: white;
+    outline: none;
+    font-size: 14px;
+    width: 120px;
+}
+
+.search-box button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    opacity: 0.7;
+}
     </style>
 </head>
 <body>
@@ -142,12 +170,16 @@
         <div class="logo">鸣潮</div>
         <ul class="nav-links">
             <li><a href="#home">首页<span>HOME</span></a></li>
-            <li><a href="#services">官网<span>OFFICIAL SITE</span></a></li>
+            <li><a href="https://mc.kurogames.com/main">官网<span>OFFICIAL SITE</span></a></li>
             <!-- 添加了 active 类来演示当前选中状态 -->
-            <li class="active"><a href="#about">人物介绍<span>CHARACTERS</span></a></li>
+            <li class="active"><a href="./shouye.html">人物介绍<span>CHARACTERS</span></a></li>
             <li><a href="#contact">武器介绍<span>WEAPONS</span></a></li>
-            <li><a href="#faq">大世界观<span>WORLD LORE</span></a></li>
+            <li><a href="./shijie.html">大世界观<span>WORLD LORE</span></a></li>
         </ul>
+        <div class="search-box">
+    <input type="text" placeholder="搜索共鸣者...">
+    <button>🔍</button>
+</div>
     </nav>
 
 </body>

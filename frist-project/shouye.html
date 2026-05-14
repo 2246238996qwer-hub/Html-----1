@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人物介绍</title>
+    <style>
+        :root {
+            --primary-color: #a855f7;
+            --secondary-color: #2dd4bf;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f1f5f9;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .character-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            max-width: 800px;
+            width: 100%;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* 左侧图片区域 */
+        .portrait-section {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)),
+                        url('./TP/屏幕截图\ 2026-05-14\ 014717.png') center/cover;
+            min-height: 400px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+        }
+
+        .name-tag h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .name-tag p {
+            margin: 5px 0 0;
+            font-style: italic;
+            opacity: 0.8;
+        }
+
+        /* 右侧详情区域 */
+        .info-section {
+            padding: 30px;
+        }
+
+        .section-title {
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            display: inline-block;
+            margin-bottom: 15px;
+            padding-bottom: 3px;
+            font-size: 1.2rem;
+        }
+
+        .info-grid {
+            margin-bottom: 25px;
+        }
+
+        /* 武器与天赋样式 */
+        .weapon-box, .talent-box {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        /* 背景描述 */
+        .background-story {
+            line-height: 1.6;
+            font-size: 0.95rem;
+            color: #cbd5e1;
+        }
+
+        @media (max-width: 600px) {
+            .character-card {
+                grid-template-columns: 1fr;
+            }
+            .portrait-section {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="character-card">
+        <!-- 人物形象展示 -->
+        <div class="portrait-section">
+            <div class="name-tag">
+                <h1>爱弥斯</h1>
+                <p>称号：冰原共鸣者</p>
+            </div>
+        </div>
+
+        <!-- 人物详细信息 -->
+        <div class="info-section">
+            
+            <!-- 武器 -->
+            <div class="info-grid">
+                <div class="section-title">专属武器</div>
+                <div class="weapon-box">
+                    <span class="highlight">「永远的启明星」</span> - 材质取自陨落的星辰之核，刀身流转着幽紫色的冷光，能够切开空间裂缝。
+                </div>
+            </div>
+
+            <!-- 天赋 -->
+            <div class="info-grid">
+                <div class="section-title">核心天赋</div>
+                <div class="talent-box">
+                    <p><strong>🌑 于万籁之前：</strong> 处于即刻响应状态时，爱弥斯 / 机兵形态的重击伤害加深 200%。
+即刻响应触发：释放共鸣解放（大招）且共鸣率满 4 星时激活。
+高阶效果：即刻响应期间，重击蓄力可牵引周围敌人，二段蓄力额外获得100 同步率</p>
+                    <p><strong>⚡ 星与星之间：</strong> 根据当前模态获得不同增益：
+震谐模态（对单）：队友附加震谐偏移或造成震谐伤害时，爱弥斯暴击伤害 + 60%，大招终结伤害加深 25%。
+聚爆模态（对群）：队友附加聚爆效应时，爱弥斯暴击伤害 + 60%，大招终结伤害加深 25%。
+重置条件：编入队伍或切换模态时刷新层数。</p>
+                   <p><strong>升级天赋（普攻 / 共鸣 / 变奏）</strong> 1. 常态攻击・爱弥斯 / 机兵
+至多 4 段普攻，机兵形态攻击范围更大、倍率更高。
+升级收益：提升普攻 / 重击基础伤害；优先级：低（6 级够用）。
+2. 共鸣技能・光翼共奏（形态切换）
+爱弥斯↔机兵形态切换，消耗 100 同步率释放共鸣解放（热熔伤害）。
+光翼共奏之时：普攻 4 段后触发（5 秒），可空中释放。
+升级收益：提升形态切换伤害与共鸣解放倍率；优先级：高（8 级 +）。
+3. 变奏技能・以旋律穿梭长空 / 星降降临于此
+入场造成热熔伤害，获得流光增幅（15 秒）：释放过载额外 + 1 共鸣率。
+形态差异：机兵形态变奏替换为 “星降降临于此”，效果一致。
+升级收益：提升变奏伤害与流光增幅效果；优先级：中（6 级够用）。
+4. 共鸣解放・星辉破界而来（大招）
+过载（一段）：消耗同步率，造成热熔伤害，挂震谐 / 聚爆轨迹。
+终结（二段）：同步率 + 共鸣率满时释放，巨额热熔伤害，引爆轨迹。
+升级收益：核心伤害来源，大幅提升过载 / 终结倍率；优先级：最高（必拉满）。</p>
+                </div>
+            </div>
+
+            <!-- 背景 -->
+            <div class="info-grid">
+                <div class="section-title">人物背景</div>
+                <div class="background-story">
+                    早年：冰原孤儿，被 “你” 拯救
+出身：生于拉海洛冰原，父母是研究虚质磁暴的研究员，在事故中双亡，她成为孤儿。
+宿命相遇：幼年失足坠入冰原渐湖，被 ** 穿越时空的漂泊者（玩家）** 救下并短暂收养，成为她生命里唯一的光。
+初心种子：漂泊者离开前嘱她 “轻松快乐地活着”，同时无意间传递了 “拯救世界” 的信念，成为她一生的精神底色。</p>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

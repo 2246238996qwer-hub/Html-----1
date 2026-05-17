@@ -15,14 +15,11 @@
 
         /* 背景设置 */
         body {
-            /* 这里引用了刚才生成的图片，请确保图片与网页文件在同一目录下 */
-            background-image: url('./TP/6b50f160241fb96bf43256bb779e1ed4.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            height: 100vh;
-            overflow: hidden;
+            background-color: #0b0e14; /* 页面底色，换成暗色调配合游戏风格 */
             color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         /* 顶部遮罩层，让导航栏文字更清晰 */
@@ -44,6 +41,7 @@
             justify-content: center; /* 居中对齐 */
             align-items: center;
             padding: 30px 50px;
+            flex-shrink: 0;
         }
 
         /* 左侧 Logo (可选) */
@@ -130,37 +128,276 @@
         .nav-links li.active a::before {
             width: 60%;
         }
+        
         .search-box {
-    position: absolute;
-    right: 50px; /* 固定在右侧 */
-    display: flex;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 20px;
-    padding: 5px 15px;
-    backdrop-filter: blur(5px);
-}
+            position: absolute;
+            right: 50px; /* 固定在右侧 */
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 5px 15px;
+            backdrop-filter: blur(5px);
+        }
 
-.search-box input {
-    background: none;
-    border: none;
-    color: white;
-    outline: none;
-    font-size: 14px;
-    width: 120px;
-}
+        .search-box input {
+            background: none;
+            border: none;
+            color: white;
+            outline: none;
+            font-size: 14px;
+            width: 120px;
+        }
 
-.search-box button {
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-    opacity: 0.7;
-}
+        .search-box button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            opacity: 0.7;
+        }
+
+        /* ==================== 新增：首屏主题大图样式 ==================== */
+        .theme-banner {
+            position: absolute; /* 脱离文档流，让其从页面顶部开始铺满首屏 */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh; /* 覆盖整张屏幕 */
+            z-index: 0; /* 放在导航栏下面 */
+            overflow: hidden;
+        }
+
+        .theme-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 完美覆盖不拉伸变形 */
+            background-position: center;
+        }
+
+        /* ==================== 幻灯片样式调整 ==================== */
+        .slider-container {
+            position: relative;
+            z-index: 2;
+            margin-top: 100vh; /* 核心：将其推到首屏主题大图的下方 */
+            padding: 80px 20px; /* 适当增加上下留白 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            user-select: none;
+        }
+
+        .slider-wrapper {
+            position: relative;
+            width: 850px;
+            height: 480px;
+            border-radius: 16px;
+            overflow: hidden;
+            background: rgba(15, 20, 28, 0.75); /* 加深毛玻璃背景，防止被底色影响 */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+        }
+
+        /* 幻灯片单项 */
+        .slide-item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 40px 60px;
+        }
+
+        .slide-item.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* 角色文本介绍区 */
+        .char-info {
+            width: 45%;
+            transform: translateX(-30px);
+            transition: transform 0.6s ease;
+            opacity: 0;
+        }
+
+        .slide-item.active .char-info {
+            transform: translateX(0);
+            opacity: 1;
+            transition-delay: 0.2s;
+        }
+
+        .char-name {
+            font-size: 42px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: #ffffff;
+            margin-bottom: 5px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .char-title {
+            font-size: 14px;
+            color: #5ab4f2;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .char-desc {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-left: 3px solid #5ab4f2;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* 角色图片区 */
+        .char-img-box {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: scale(0.9) translateX(30px);
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.6s;
+            opacity: 0;
+        }
+
+        .slide-item.active .char-img-box {
+            transform: scale(1) translateX(0);
+            opacity: 1;
+            transition-delay: 0.1s;
+        }
+
+        .char-img-box img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6));
+        }
+
+        /* 左右切换按钮样式 */
+        .arrow-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(25, 30, 40, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+
+        .arrow-btn:hover {
+            background: rgba(90, 180, 242, 0.2);
+            border-color: #5ab4f2;
+            color: #5ab4f2;
+            box-shadow: 0 0 15px rgba(90, 180, 242, 0.4);
+        }
+
+        .prev-btn { left: -25px; }
+        .next-btn { right: -25px; }
+
+        /* 下方指示器（小圆点） */
+        .dots-container {
+            position: absolute;
+            bottom: 20px;
+            left: 60px;
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 25px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: #5ab4f2;
+            width: 40px;
+            box-shadow: 0 0 10px #5ab4f2;
+        }
+
+        /* ==================== 全屏开屏大图遮罩样式 ==================== */
+        .fullscreen-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 999; /* 确保在最上层 */
+            background-color: #000;
+            cursor: pointer;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .fullscreen-overlay img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+
+        .overlay-tips {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 18px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .fullscreen-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
     </style>
 </head>
 <body>
+
+    <!-- 全屏触碰切换/隐藏的开屏大图 -->
+    <div id="welcome-overlay" class="fullscreen-overlay">
+        <img src="./TP/welcome.jpg" alt="点击进入" onerror="this.src='TP/屏幕截图 2026-05-16 162815.png'">
+        <div class="overlay-tips">—— 点击任意位置进入我的页面 ——</div>
+    </div>
 
     <!-- 顶部暗色渐变遮罩 -->
     <div class="header-mask"></div>
@@ -171,16 +408,146 @@
         <ul class="nav-links">
             <li><a href="#home">首页<span>HOME</span></a></li>
             <li><a href="https://mc.kurogames.com/main">官网<span>OFFICIAL SITE</span></a></li>
-            <!-- 添加了 active 类来演示当前选中状态 -->
             <li class="active"><a href="./shouye.html">人物介绍<span>CHARACTERS</span></a></li>
             <li><a href="#contact">武器介绍<span>WEAPONS</span></a></li>
             <li><a href="./shijie.html">大世界观<span>WORLD LORE</span></a></li>
         </ul>
         <div class="search-box">
-    <input type="text" placeholder="搜索共鸣者...">
-    <button>🔍</button>
-</div>
+            <input type="text" placeholder="搜索共鸣者...">
+            <button>🔍</button>
+        </div>
     </nav>
+
+    <!-- ==================== 新增：首屏主题大图 ==================== -->
+    <div class="theme-banner">
+        <!-- 在这里放你想要在导航栏下方的整屏大图路径 -->
+        <img src="./TP/6b50f160241fb96bf43256bb779e1ed4.jpg" alt="主题大图">
+    </div>
+
+    <!-- ==================== 幻灯片主体区域（现位于大图下方） ==================== -->
+    <div class="slider-container">
+        <div class="slider-wrapper">
+            <!-- 切换箭头 -->
+            <button class="arrow-btn prev-btn" id="prevBtn">❮</button>
+            <button class="arrow-btn next-btn" id="nextBtn">❯</button>
+
+            <!-- 幻灯片 1：忌炎 -->
+            <div class="slide-item active">
+                <div class="char-info">
+                    <h2 class="char-name">忌炎</h2>
+                    <div class="char-title">JIYAN / 夜归团长</div>
+                    <p class="char-desc">夜归团长，心怀仁义。孤身独行于危机四伏的荒野，枪舞风雷，荡平前路的浊流。具有极强的号召力与战术素养。</p>
+                </div>
+                <div class="char-img-box">
+                    <img src="./TP/jiyan.png" alt="忌炎" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&auto=format&fit=crop'">
+                </div>
+            </div>
+
+            <!-- 幻灯片 2：今汐 -->
+            <div class="slide-item">
+                <div class="char-info">
+                    <h2 class="char-name">今汐</h2>
+                    <div class="char-title">JINHSI / 瑈云令尹</div>
+                    <p class="char-desc">今州令尹，身负重任。以万民之愿为剑，引导着今州走向破晓的拂晓。虽然年轻，却有着超乎常人的沉稳与担当。</p>
+                </div>
+                <div class="char-img-box">
+                    <img src="./TP/jinxi.png" alt="今汐" onerror="this.src='https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?w=500&auto=format&fit=crop'">
+                </div>
+            </div>
+
+            <!-- 幻灯片 3：长离 -->
+            <div class="slide-item">
+                <div class="char-info">
+                    <h2 class="char-name">长离</h2>
+                    <div class="char-title">CHANGLI / 离火雀羽</div>
+                    <p class="char-desc">今州令尹前任老师。心思缜密，智计百出。以天下为局，落子无悔。操控火焰与炽羽，在战场中如飞蛾扑火般绚烂。</p>
+                </div>
+                <div class="char-img-box">
+                    <img src="./TP/changli.png" alt="长离" onerror="this.src='https://images.unsplash.com/photo-1604871000636-074fa5117945?w=500&auto=format&fit=crop'">
+                </div>
+            </div>
+
+            <!-- 下方指示圆点 -->
+            <div class="dots-container" id="dotsContainer">
+                <div class="dot active"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 幻灯片交互 JS ==================== -->
+    <script>
+        const slides = document.querySelectorAll('.slide-item');
+        const dots = document.querySelectorAll('.dot');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        
+        let currentIndex = 0;
+        let autoPlayTimer = null;
+
+        // 更新显示状态
+        function updateSlider(index) {
+            slides[currentIndex].classList.remove('active');
+            dots[currentIndex].classList.remove('active');
+
+            currentIndex = (index + slides.length) % slides.length;
+
+            slides[currentIndex].classList.add('active');
+            dots[currentIndex].classList.add('active');
+        }
+
+        // 下一张
+        function nextSlide() {
+            updateSlider(currentIndex + 1);
+        }
+
+        // 上一张
+        function prevSlide() {
+            updateSlider(currentIndex - 1);
+        }
+
+        // 绑定按钮事件
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            resetAutoPlay();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            resetAutoPlay();
+        });
+
+        // 绑定指示器圆点点击事件
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                updateSlider(index);
+                resetAutoPlay();
+            });
+        });
+
+        // 自动播放
+        function startAutoPlay() {
+            autoPlayTimer = setInterval(nextSlide, 5000); 
+        }
+
+        function resetAutoPlay() {
+            clearInterval(autoPlayTimer);
+            startAutoPlay();
+        }
+
+        // 初始化自动播放
+        startAutoPlay();
+
+        // 全屏大图触碰切换逻辑
+        const overlay = document.getElementById('welcome-overlay');
+        if (overlay) {
+            overlay.addEventListener('click', () => {
+                overlay.classList.add('hidden');
+                console.log("已进入主页面");
+            });
+        }
+    </script>
 
 </body>
 </html>

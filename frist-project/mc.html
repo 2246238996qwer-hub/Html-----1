@@ -15,7 +15,7 @@
 
         /* 背景设置 */
         body {
-            background-color: #0b0e14; /* 页面底色，换成暗色调配合游戏风格 */
+            background-color: #0b0e14; 
             color: #ffffff;
             display: flex;
             flex-direction: column;
@@ -35,16 +35,19 @@
 
         /* 导航栏容器 */
         nav {
-            position: relative;
-            z-index: 2;
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
             display: flex;
-            justify-content: center; /* 居中对齐 */
+            justify-content: center; 
             align-items: center;
             padding: 30px 50px;
             flex-shrink: 0;
         }
 
-        /* 左侧 Logo (可选) */
+        /* 左侧 Logo */
         .logo {
             position: absolute;
             left: 50px;
@@ -58,7 +61,7 @@
         .nav-links {
             list-style: none;
             display: flex;
-            gap: 15px; /* 按钮之间的间距 */
+            gap: 15px; 
         }
 
         .nav-links li {
@@ -78,7 +81,7 @@
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 8px;
             background: rgba(25, 30, 40, 0.4);
-            backdrop-filter: blur(8px); /* 毛玻璃效果 */
+            backdrop-filter: blur(8px); 
             -webkit-backdrop-filter: blur(8px);
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             position: relative;
@@ -95,22 +98,22 @@
             transition: all 0.3s ease;
         }
 
-        /* 悬停与激活状态效果 (科技蓝发光) */
+        /* 悬停与激活状态效果 */
         .nav-links a:hover,
         .nav-links li.active a {
             color: #ffffff;
-            border-color: #5ab4f2;
-            background: rgba(90, 180, 242, 0.15);
-            box-shadow: 0 0 15px rgba(90, 180, 242, 0.6), inset 0 0 10px rgba(90, 180, 242, 0.2);
+            border-color: #ff69b4; /* 这里的导航也可以保持原样，或者统一改成粉色 */
+            background: rgba(255, 105, 180, 0.15);
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.6), inset 0 0 10px rgba(255, 105, 180, 0.2);
             transform: translateY(-2px);
         }
 
         .nav-links li.active a span,
         .nav-links a:hover span {
-            color: #5ab4f2;
+            color: #ff69b4;
         }
 
-        /* 按钮顶部的高光线细节 */
+        /* 按钮顶部的高光线 */
         .nav-links a::before {
             content: '';
             position: absolute;
@@ -119,9 +122,9 @@
             transform: translateX(-50%);
             width: 0;
             height: 2px;
-            background: #5ab4f2;
+            background: #ff69b4;
             transition: all 0.3s ease;
-            box-shadow: 0 0 10px #5ab4f2;
+            box-shadow: 0 0 10px #ff69b4;
         }
 
         .nav-links a:hover::before,
@@ -131,7 +134,7 @@
         
         .search-box {
             position: absolute;
-            right: 50px; /* 固定在右侧 */
+            right: 50px; 
             display: flex;
             align-items: center;
             background: rgba(255, 255, 255, 0.1);
@@ -158,46 +161,75 @@
             opacity: 0.7;
         }
 
-        /* ==================== 新增：首屏主题大图样式 ==================== */
+        /* ==================== 首屏第一张大图样式 ==================== */
         .theme-banner {
-            position: absolute; /* 脱离文档流，让其从页面顶部开始铺满首屏 */
+            position: absolute; 
             top: 0;
             left: 0;
             width: 100%;
-            height: 100vh; /* 覆盖整张屏幕 */
-            z-index: 0; /* 放在导航栏下面 */
+            height: 100vh; /* 撑满第一屏 */
+            z-index: 0; 
             overflow: hidden;
         }
 
         .theme-banner img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* 完美覆盖不拉伸变形 */
+            object-fit: cover; 
             background-position: center;
         }
 
-        /* ==================== 幻灯片样式调整 ==================== */
-        .slider-container {
+        /* ==================== 第二屏组合容器 ==================== */
+        .section-two {
             position: relative;
+            width: 100%;
+            height: 100vh;      /* 让第二屏也是整屏高度 */
+            margin-top: 100vh;  /* 核心：把它推到首屏大图的下方 */
             z-index: 2;
-            margin-top: 100vh; /* 核心：将其推到首屏主题大图的下方 */
-            padding: 80px 20px; /* 适当增加上下留白 */
+            overflow: hidden;
+        }
+
+        /* 第二张背景图片 */
+        .section-two-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;         /* 层级设为 1，确保在幻灯片下面 */
+        }
+
+        /* ==================== 幻灯片容器样式 ==================== */
+        .slider-container {
+            position: absolute; 
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;        /* 层级设为 2，叠在第二张图上面 */
             display: flex;
             justify-content: center;
             align-items: center;
             user-select: none;
+            background: rgba(0, 0, 0, 0.25); /* 稍微加深遮罩，衬托粉色背景 */
         }
 
+        /* 【核心修改】幻灯片粉色毛玻璃背景板 */
         .slider-wrapper {
             position: relative;
             width: 850px;
             height: 480px;
             border-radius: 16px;
             overflow: hidden;
-            background: rgba(15, 20, 28, 0.75); /* 加深毛玻璃背景，防止被底色影响 */
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(12px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            /* 改用半透明的暗粉色作为底色，配合毛玻璃 */
+            background: rgba(40, 20, 30, 0.75); 
+            /* 浅粉色半透明边框 */
+            border: 1px solid rgba(255, 105, 180, 0.25);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            /* 粉色霓虹阴影效果 */
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 105, 180, 0.15);
         }
 
         /* 幻灯片单项 */
@@ -244,22 +276,24 @@
             text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
+        /* 标题改成粉色 */
         .char-title {
             font-size: 14px;
-            color: #5ab4f2;
+            color: #ff69b4; 
             text-transform: uppercase;
             letter-spacing: 3px;
             margin-bottom: 20px;
             font-weight: bold;
         }
 
+        /* 左侧边框改成粉色 */
         .char-desc {
             font-size: 15px;
             color: rgba(255, 255, 255, 0.7);
             line-height: 1.8;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.03);
             padding: 15px;
-            border-left: 3px solid #5ab4f2;
+            border-left: 3px solid #ff69b4; 
             border-radius: 0 8px 8px 0;
         }
 
@@ -288,14 +322,14 @@
             filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6));
         }
 
-        /* 左右切换按钮样式 */
+        /* 左右切换按钮样式 - 悬停时变为粉色 */
         .arrow-btn {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
             width: 50px;
             height: 50px;
-            background: rgba(25, 30, 40, 0.6);
+            background: rgba(25, 20, 25, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 50%;
             color: #fff;
@@ -310,16 +344,16 @@
         }
 
         .arrow-btn:hover {
-            background: rgba(90, 180, 242, 0.2);
-            border-color: #5ab4f2;
-            color: #5ab4f2;
-            box-shadow: 0 0 15px rgba(90, 180, 242, 0.4);
+            background: rgba(255, 105, 180, 0.2);
+            border-color: #ff69b4;
+            color: #ff69b4;
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.4);
         }
 
         .prev-btn { left: -25px; }
         .next-btn { right: -25px; }
 
-        /* 下方指示器（小圆点） */
+        /* 下方指示器（小圆点）- 激活时变为粉色 */
         .dots-container {
             position: absolute;
             bottom: 20px;
@@ -339,9 +373,9 @@
         }
 
         .dot.active {
-            background: #5ab4f2;
+            background: #ff69b4;
             width: 40px;
-            box-shadow: 0 0 10px #5ab4f2;
+            box-shadow: 0 0 10px #ff69b4;
         }
 
         /* ==================== 全屏开屏大图遮罩样式 ==================== */
@@ -351,7 +385,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: 999; /* 确保在最上层 */
+            z-index: 999; 
             background-color: #000;
             cursor: pointer;
             transition: opacity 0.8s ease, visibility 0.8s ease;
@@ -418,60 +452,65 @@
         </div>
     </nav>
 
-    <!-- ==================== 新增：首屏主题大图 ==================== -->
+    <!-- ==================== 首屏第一张大图 ==================== -->
     <div class="theme-banner">
-        <!-- 在这里放你想要在导航栏下方的整屏大图路径 -->
         <img src="./TP/6b50f160241fb96bf43256bb779e1ed4.jpg" alt="主题大图">
     </div>
 
-    <!-- ==================== 幻灯片主体区域（现位于大图下方） ==================== -->
-    <div class="slider-container">
-        <div class="slider-wrapper">
-            <!-- 切换箭头 -->
-            <button class="arrow-btn prev-btn" id="prevBtn">❮</button>
-            <button class="arrow-btn next-btn" id="nextBtn">❯</button>
+    <!-- ==================== 第二屏组合（大图背景 + 叠加粉色幻灯片） ==================== -->
+    <div class="section-two">
+        <!-- 这是第二张大图，作为这一屏的底图背景 -->
+        <img class="section-two-bg" src="TP/屏幕截图 2026-05-18 211104.png" alt="第二屏背景" onerror="this.src='https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?w=1200&auto=format&fit=crop'">
 
-            <!-- 幻灯片 1：忌炎 -->
-            <div class="slide-item active">
-                <div class="char-info">
-                    <h2 class="char-name">忌炎</h2>
-                    <div class="char-title">JIYAN / 夜归团长</div>
-                    <p class="char-desc">夜归团长，心怀仁义。孤身独行于危机四伏的荒野，枪舞风雷，荡平前路的浊流。具有极强的号召力与战术素养。</p>
-                </div>
-                <div class="char-img-box">
-                    <img src="./TP/jiyan.png" alt="忌炎" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&auto=format&fit=crop'">
-                </div>
-            </div>
+        <!-- 幻灯片主体区域 -->
+        <div class="slider-container">
+            <div class="slider-wrapper">
+                <!-- 切换箭头 -->
+                <button class="arrow-btn prev-btn" id="prevBtn">❮</button>
+                <button class="arrow-btn next-btn" id="nextBtn">❯</button>
 
-            <!-- 幻灯片 2：今汐 -->
-            <div class="slide-item">
-                <div class="char-info">
-                    <h2 class="char-name">今汐</h2>
-                    <div class="char-title">JINHSI / 瑈云令尹</div>
-                    <p class="char-desc">今州令尹，身负重任。以万民之愿为剑，引导着今州走向破晓的拂晓。虽然年轻，却有着超乎常人的沉稳与担当。</p>
+                <!-- 幻灯片 1：忌炎 -->
+                <div class="slide-item active">
+                    <div class="char-info">
+                        <h2 class="char-name">卡提</h2>
+                        <div class="char-title">JIYAN / 鸣式共鸣者</div>
+                        <p class="char-desc">原名芙露德莉斯，是鸣式利维亚坦创造的双共鸣者（同时联结岁主英白拉多与鸣式），黎那汐塔前圣女，现流浪骑士。</p>
+                    </div>
+                    <div class="char-img-box">
+                        <img src="TP/屏幕截图 2026-05-18 214815.png" alt="忌炎" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&auto=format&fit=crop'">
+                    </div>
                 </div>
-                <div class="char-img-box">
-                    <img src="./TP/jinxi.png" alt="今汐" onerror="this.src='https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?w=500&auto=format&fit=crop'">
-                </div>
-            </div>
 
-            <!-- 幻灯片 3：长离 -->
-            <div class="slide-item">
-                <div class="char-info">
-                    <h2 class="char-name">长离</h2>
-                    <div class="char-title">CHANGLI / 离火雀羽</div>
-                    <p class="char-desc">今州令尹前任老师。心思缜密，智计百出。以天下为局，落子无悔。操控火焰与炽羽，在战场中如飞蛾扑火般绚烂。</p>
+                <!-- 幻灯片 2：今汐 -->
+                <div class="slide-item">
+                    <div class="char-info">
+                        <h2 class="char-name">今汐</h2>
+                        <div class="char-title">JINHSI / 瑈云令尹</div>
+                        <p class="char-desc">今州令尹，身负重任。以万民之愿为剑，引导着今州走向破晓的拂晓。虽然年轻，却有着超乎常人的沉稳与担当。</p>
+                    </div>
+                    <div class="char-img-box">
+                        <img src="TP/屏幕截图 2026-05-18 214536.png" alt="今汐" onerror="this.src='https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?w=500&auto=format&fit=crop'">
+                    </div>
                 </div>
-                <div class="char-img-box">
-                    <img src="./TP/changli.png" alt="长离" onerror="this.src='https://images.unsplash.com/photo-1604871000636-074fa5117945?w=500&auto=format&fit=crop'">
-                </div>
-            </div>
 
-            <!-- 下方指示圆点 -->
-            <div class="dots-container" id="dotsContainer">
-                <div class="dot active"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
+                <!-- 幻灯片 3：长离 -->
+                <div class="slide-item">
+                    <div class="char-info">
+                        <h2 class="char-name">长离</h2>
+                        <div class="char-title">CHANGLI / 离火雀羽</div>
+                        <p class="char-desc">今州令尹前任老师。心思缜密，智计百出。以天下为局，落子无悔。操控火焰与炽羽，在战场中如飞蛾扑火般绚烂。</p>
+                    </div>
+                    <div class="char-img-box">
+                        <img src="TP/屏幕截图 2026-05-18 214458.png" alt="长离" onerror="this.src='https://images.unsplash.com/photo-1604871000636-074fa5117945?w=500&auto=format&fit=crop'">
+                    </div>
+                </div>
+
+                <!-- 下方指示圆点 -->
+                <div class="dots-container" id="dotsContainer">
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -486,7 +525,6 @@
         let currentIndex = 0;
         let autoPlayTimer = null;
 
-        // 更新显示状态
         function updateSlider(index) {
             slides[currentIndex].classList.remove('active');
             dots[currentIndex].classList.remove('active');
@@ -497,17 +535,14 @@
             dots[currentIndex].classList.add('active');
         }
 
-        // 下一张
         function nextSlide() {
             updateSlider(currentIndex + 1);
         }
 
-        // 上一张
         function prevSlide() {
             updateSlider(currentIndex - 1);
         }
 
-        // 绑定按钮事件
         nextBtn.addEventListener('click', () => {
             nextSlide();
             resetAutoPlay();
@@ -518,7 +553,6 @@
             resetAutoPlay();
         });
 
-        // 绑定指示器圆点点击事件
         dots.forEach((dot, index) => {
             dot.addEventListener('click', () => {
                 updateSlider(index);
@@ -526,7 +560,6 @@
             });
         });
 
-        // 自动播放
         function startAutoPlay() {
             autoPlayTimer = setInterval(nextSlide, 5000); 
         }
@@ -536,10 +569,8 @@
             startAutoPlay();
         }
 
-        // 初始化自动播放
         startAutoPlay();
 
-        // 全屏大图触碰切换逻辑
         const overlay = document.getElementById('welcome-overlay');
         if (overlay) {
             overlay.addEventListener('click', () => {

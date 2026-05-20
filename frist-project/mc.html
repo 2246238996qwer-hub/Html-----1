@@ -102,7 +102,7 @@
         .nav-links a:hover,
         .nav-links li.active a {
             color: #ffffff;
-            border-color: #ff69b4; /* 这里的导航也可以保持原样，或者统一改成粉色 */
+            border-color: #ff69b4; 
             background: rgba(255, 105, 180, 0.15);
             box-shadow: 0 0 15px rgba(255, 105, 180, 0.6), inset 0 0 10px rgba(255, 105, 180, 0.2);
             transform: translateY(-2px);
@@ -184,7 +184,7 @@
             position: relative;
             width: 100%;
             height: 100vh;      /* 让第二屏也是整屏高度 */
-            margin-top: 100vh;  /* 核心：把它推到首屏大图的下方 */
+            margin-top: 100vh;  /* 推到首屏大图的下方 */
             z-index: 2;
             overflow: hidden;
         }
@@ -215,20 +215,17 @@
             background: rgba(0, 0, 0, 0.25); /* 稍微加深遮罩，衬托粉色背景 */
         }
 
-        /* 【核心修改】幻灯片粉色毛玻璃背景板 */
+        /* 幻灯片粉色毛玻璃背景板 */
         .slider-wrapper {
             position: relative;
             width: 850px;
             height: 480px;
             border-radius: 16px;
             overflow: hidden;
-            /* 改用半透明的暗粉色作为底色，配合毛玻璃 */
             background: rgba(40, 20, 30, 0.75); 
-            /* 浅粉色半透明边框 */
             border: 1px solid rgba(255, 105, 180, 0.25);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            /* 粉色霓虹阴影效果 */
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 105, 180, 0.15);
         }
 
@@ -423,6 +420,123 @@
             opacity: 0;
             visibility: hidden;
         }
+
+        /* ==================== 第三屏（最后一页）组合容器样式 ==================== */
+        .section-three {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;   /* 撑满整屏高度 */
+            z-index: 3;
+            display: flex;
+            align-items: flex-end; /* 让内容整体偏向屏幕下方对齐 */
+            justify-content: space-between;
+            padding: 120px 50px 50px 50px; /* 留出顶部导航栏以及四周的间距 */
+            gap: 40px;
+            overflow: hidden;
+        }
+
+        /* 第三页全新独立背景板 */
+        .section-three-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1; /* 置于底层 */
+        }
+
+        /* 第三页背景上方的黑灰色遮罩，用来调低背景亮度防止喧宾夺主 */
+        .section-three-mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(11, 14, 20, 0.9) 0%, rgba(11, 14, 20, 0.4) 100%);
+            z-index: 2;
+        }
+
+        /* 视频包裹层：占1/4宽（25%），提升z-index确保在背景板上方 */
+        .video-box {
+            position: relative;
+            width: 25%;
+            aspect-ratio: 16/9; /* 保持16:9的标准视频比例 */
+            background: rgba(25, 30, 40, 0.5);
+            border: 1px solid rgba(255, 105, 180, 0.25); /* 延续粉色霓虹边框 */
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6), 0 0 15px rgba(255, 105, 180, 0.15);
+            z-index: 3;
+        }
+
+        .video-box video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 表格包裹层：占1/2宽（50%），提升z-index确保在背景板上方 */
+        .table-box {
+            position: relative;
+            width: 50%;
+            background: rgba(20, 22, 30, 0.7); /* 半透明暗色突出表格内容 */
+            border: 1px solid rgba(255, 105, 180, 0.25);
+            border-radius: 12px;
+            padding: 24px;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.7), 0 0 20px rgba(255, 105, 180, 0.2);
+            margin-bottom: 10px;
+            z-index: 3;
+        }
+
+        .table-box h3 {
+            font-size: 20px;
+            color: #ff69b4; /* 粉色标题 */
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            text-shadow: 0 0 8px rgba(255, 105, 180, 0.3);
+        }
+
+        /* 游戏风数据表格样式 */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .data-table th, .data-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 14px;
+        }
+
+        .data-table th {
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 600;
+            text-transform: uppercase;
+            border-bottom: 2px solid rgba(255, 105, 180, 0.4);
+        }
+
+        .data-table tr:hover td {
+            background: rgba(255, 105, 180, 0.08); /* 悬停时行粉色高亮 */
+            color: #ff69b4;
+        }
+
+        /* 响应式微调：屏幕太小时自动堆叠 */
+        @media (max-width: 1024px) {
+            .section-three {
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: auto;
+                padding-top: 140px;
+            }
+            .video-box, .table-box {
+                width: 90%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -469,7 +583,7 @@
                 <button class="arrow-btn prev-btn" id="prevBtn">❮</button>
                 <button class="arrow-btn next-btn" id="nextBtn">❯</button>
 
-                <!-- 幻灯片 1：忌炎 -->
+                <!-- 幻灯片 1：卡提 -->
                 <div class="slide-item active">
                     <div class="char-info">
                         <h2 class="char-name">卡提</h2>
@@ -515,7 +629,63 @@
         </div>
     </div>
 
-    <!-- ==================== 幻灯片交互 JS ==================== -->
+    <!-- ==================== 第三屏组合（全屏背景板 + 左下角视频 + 右侧表格） ==================== -->
+    <div class="section-three">
+        <!-- 第三页专属背景板图片：你可以将这里的 src 换成你需要的目标大图 -->
+        <img class="section-three-bg" src="TP/6b50f160241fb96bf43256bb779e1ed4.jpg" alt="第三页大背景板" onerror="this.src='https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=1200&auto=format&fit=crop'">
+        
+        <!-- 背景暗色半透明渐变层，保护前景文本视线 -->
+        <div class="section-three-mask"></div>
+
+        <!-- 左下角视频区 (占1/4空间) -->
+        <div class="video-box">
+            <!-- 替换 src 路径可更换您的本地或网络视频文件 -->
+            <video src="./video/character_showcase.mp4" controls autoplay loop muted></video>
+        </div>
+
+        <!-- 右侧表格区 (占1/2空间) -->
+        <div class="table-box">
+            <h3>共鸣者核心数据面板</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>属性分类</th>
+                        <th>卡提</th>
+                        <th>今汐</th>
+                        <th>长离</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>共鸣属性 (Element)</td>
+                        <td>导电 / 衍射</td>
+                        <td>衍射 (Spectro)</td>
+                        <td>热熔 (Fusion)</td>
+                    </tr>
+                    <tr>
+                        <td>武器类型 (Weapon)</td>
+                        <td>长刃 / 双剑</td>
+                        <td>长刃 (Broadblade)</td>
+                        <td>迅刀 (Sword)</td>
+                    </tr>
+                    <tr>
+                        <td>评级评定 (Rarity)</td>
+                        <td>⭐⭐⭐⭐⭐</td>
+                        <td>⭐⭐⭐⭐⭐</td>
+                        <td>⭐⭐⭐⭐⭐</td>
+                    </tr>
+                    <tr>
+                        <td>所属阵营 (Faction)</td>
+                        <td>流浪骑士 (前圣女)</td>
+                        <td>今州瑈云 (令尹)</td>
+                        <td>今州令尹府 (前师)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ==================== 幻灯片及图层交互 JS ==================== -->
     <script>
         const slides = document.querySelectorAll('.slide-item');
         const dots = document.querySelectorAll('.dot');
@@ -571,6 +741,7 @@
 
         startAutoPlay();
 
+        // 开屏过渡遮罩隐藏逻辑
         const overlay = document.getElementById('welcome-overlay');
         if (overlay) {
             overlay.addEventListener('click', () => {
